@@ -50,8 +50,23 @@ with st.form(key='application_form'):
 st.header("📝 Add New Application")
 st.text("Form goes here...")
 
-st.header("📋 View Applications")
-st.text("Data table goes here...")
+st.header("📋 All Applications")
+
+df_path = "data/applications.csv"
+
+# Try loading existing applications
+try:
+    df = pd.read_csv(df_path)
+
+    # Format date column if needed
+    if 'Application Date' in df.columns:
+        df['Application Date'] = pd.to_datetime(df['Application Date']).dt.date
+
+    st.dataframe(df, use_container_width=True)
+
+except FileNotFoundError:
+    st.warning("⚠️ No applications yet. Add some using the form above.")
+
 
 st.header("📈 Insights")
 st.text("Charts go here...")
