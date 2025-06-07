@@ -10,7 +10,7 @@ This app helps job seekers organise, monitor, and analyse their career journey i
 - 📝 Add and track job applications in real-time  
 - 📋 View and filter all applications in a table  
 - 📈 Gain insights through interactive charts (e.g., success rate, applications over time)  
-- 💾 All data stored locally in a CSV file (no database needed)
+- 💾 All data is stored locally in a CSV file (no database needed)
 
 ---
 
