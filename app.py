@@ -79,6 +79,21 @@ except FileNotFoundError:
     st.warning("⚠️ No application data available yet.")
 
 
+st.subheader("📈 Application Summary")
+
+total_apps = len(filtered_df)
+interviews = (filtered_df['Status'] == 'Interview').sum()
+offers = (filtered_df['Status'] == 'Offer').sum()
+rejections = (filtered_df['Status'] == 'Rejected').sum()
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric("Total Applications", total_apps)
+col2.metric("Interviews", interviews)
+col3.metric("Offers", offers)
+col4.metric("Rejections", rejections)
+
+
 df_path = "data/applications.csv"
 
 import os
