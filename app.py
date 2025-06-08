@@ -160,8 +160,7 @@ try:
 except FileNotFoundError:
     st.warning("📉 No data to visualize yet. Submit some applications first.")
 
-
-import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
 
 st.subheader("🧁 Status Distribution (Pie Chart)")
 
