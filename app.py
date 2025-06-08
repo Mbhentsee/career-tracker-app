@@ -81,18 +81,28 @@ except FileNotFoundError:
 
 df_path = "data/applications.csv"
 
-# Try loading existing applications
-try:
-    df = pd.read_csv(df_path)
+import os
 
-    # Format date column if needed
-    if 'Application Date' in df.columns:
-        df['Application Date'] = pd.to_datetime(df['Application Date']).dt.date
+csv_path = "data/applications.csv"
+
+# Step 1: Ensure the folder exists
+if not os.path.exists("data"):
+    os.makedirs("data")
+
+# Step 2: Load data safely
+if os.path.exists(csv_path):
+    df = pd.read_csv(csv_path)
+else:
+    # Create empty DataFrame with correct structure
+    df = pd.DataFrame(columns=["Company Name", "Position", "Application Date", "Status", "Notes"])
+
+# Step 3: Convert date column (only if not empty)
+if not df.empty:
+    df['Application Date'] = pd.to_datetime(df['Application Date'], errors='coerce')
 
     st.dataframe(df, use_container_width=True)
 
-except FileNotFoundError:
-    st.warning("⚠️ No applications yet. Add some using the form above.")
+st.warning("⚠️ No applications yet. Add some using the form above.")
 
 
 st.header("📊 Application Insights")
