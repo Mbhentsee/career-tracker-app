@@ -114,7 +114,7 @@ try:
     df['Application Date'] = pd.to_datetime(df['Application Date'])
 
     st.subheader("1. Applications by Status")
-    status_counts = df['Status'].value_counts().reset_index()
+    status_counts = filtered_df['Status'].value_counts()
     status_counts.columns = ['Status', 'Count']
     st.bar_chart(data=status_counts, x='Status', y='Count')
 
