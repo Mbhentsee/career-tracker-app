@@ -146,9 +146,10 @@ try:
     df['Application Date'] = pd.to_datetime(df['Application Date'])
 
     st.subheader("1. Applications by Status")
-    status_counts = filtered_df['Status'].value_counts()
+    status_counts = filtered_df['Status'].value_counts().reset_index()
     status_counts.columns = ['Status', 'Count']
-    st.bar_chart(data=status_counts, x='Status', y='Count')
+    st.bar_chart(data=status_counts, x='Status', y='Count')  # ✅ now works
+
 
     st.subheader("2. Applications Over Time")
     time_series = df.groupby(df['Application Date'].dt.to_period("W")).size()
