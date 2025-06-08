@@ -126,3 +126,12 @@ try:
 except FileNotFoundError:
     st.warning("📉 No data to visualize yet. Submit some applications first.")
 
+    import matplotlib.pyplot as plt
+
+st.subheader("🧁 Status Distribution (Pie Chart)")
+
+fig, ax = plt.subplots()
+ax.pie(status_counts, labels=status_counts.index, autopct='%1.1f%%', startangle=90)
+ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+st.pyplot(fig)
