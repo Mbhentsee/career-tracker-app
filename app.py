@@ -79,6 +79,13 @@ except FileNotFoundError:
     st.warning("⚠️ No application data available yet.")
 
 
+search_query = st.text_input("🔍 Search company name")
+
+# Apply search filter (case-insensitive)
+if search_query:
+    filtered_df = filtered_df[filtered_df['Company Name'].str.contains(search_query, case=False)]
+
+
 st.subheader("📈 Application Summary")
 
 total_apps = len(filtered_df)
