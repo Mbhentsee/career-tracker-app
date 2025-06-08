@@ -168,3 +168,22 @@ except FileNotFoundError:
     ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle. 
     st.pyplot(fig)
 
+st.subheader("✏️ Manage Applications")
+
+# Reset index so each row has a unique number
+filtered_df = filtered_df.reset_index(drop=True)
+
+# Loop through the table
+for index, row in filtered_df.iterrows():
+    st.write(f"### {row['Company']} - {row['Role']}")
+    
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("✏️ Edit", key=f"edit_{index}"):
+            st.session_state["edit_index"] = index
+
+    with col2:
+        if st.button("🗑️ Delete", key=f"delete_{index}"):
+            st.session_state["delete_index"] = index
+
