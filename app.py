@@ -85,6 +85,15 @@ search_query = st.text_input("🔍 Search company name")
 if search_query:
     filtered_df = filtered_df[filtered_df['Company Name'].str.contains(search_query, case=False)]
 
+sort_order = st.selectbox("Sort applications by:", ["Newest first", "Oldest first"])
+
+if not filtered_df.empty:
+    filtered_df['Application Date'] = pd.to_datetime(filtered_df['Application Date'], errors='coerce')
+
+    if sort_order == "Newest first":
+        filtered_df = filtered_df.sort_values(by="Application Date", ascending=False)
+    else:
+        filtered_df = filtered_df.sort_values(by="Application Date", ascending=True)
 
 st.subheader("📈 Application Summary")
 
@@ -157,3 +166,4 @@ ax.pie(status_counts, labels=status_counts.index, autopct='%1.1f%%', startangle=
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
 st.pyplot(fig)
+
