@@ -66,6 +66,7 @@ else:
     st.dataframe(styled_df)
 
 
+
 # 🔽 Paste filter block here
 try:
     df = pd.read_csv("data/applications.csv")
