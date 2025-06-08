@@ -52,6 +52,33 @@ st.text("Form goes here...")
 
 st.header("📋 All Applications")
 
+# 🔽 Paste filter block here
+try:
+    df = pd.read_csv("data/applications.csv")
+    df['Application Date'] = pd.to_datetime(df['Application Date'])
+
+    # Filter: Status
+    statuses = df['Status'].unique().tolist()
+    selected_status = st.multiselect("Filter by Status", options=statuses, default=statuses)
+
+    # Filter: Date Range
+    min_date = df['Application Date'].min().date()
+    max_date = df['Application Date'].max().date()
+    date_range = st.date_input("Filter by Date Range", value=(min_date, max_date))
+
+    # Apply filters
+    filtered_df = df[
+        (df['Status'].isin(selected_status)) &
+        (df['Application Date'].between(pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1])))
+    ]
+
+    st.success(f"🎯 Showing {len(filtered_df)} filtered application(s)")
+    st.dataframe(filtered_df, use_container_width=True)
+
+except FileNotFoundError:
+    st.warning("⚠️ No application data available yet.")
+
+
 df_path = "data/applications.csv"
 
 # Try loading existing applications
@@ -88,3 +115,4 @@ try:
 
 except FileNotFoundError:
     st.warning("📉 No data to visualize yet. Submit some applications first.")
+
