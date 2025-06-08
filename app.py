@@ -51,7 +51,7 @@ st.header("📝 Add New Application")
 st.text("Form goes here...")
 
 st.subheader("📋 All Applications")
-st.dataframe(filtered_df)
+
 
 # 🔽 Paste filter block here
 try:
