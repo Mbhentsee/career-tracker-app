@@ -50,22 +50,8 @@ with st.form(key='application_form'):
 st.header("📝 Add New Application")
 st.text("Form goes here...")
 
-st.subheader("📋 Your Applications")
-
-if filtered_df.empty:
-    st.info("No applications match your filters.")
-else:
-    styled_df = filtered_df.copy()
-    styled_df['Status'] = styled_df['Status'].map({
-        'Applied': '📤 Applied',
-        'Interview': '🗣️ Interview',
-        'Offer': '🎉 Offer',
-        'Rejected': '❌ Rejected'
-    }).fillna('🔍 Other')
-
-    st.dataframe(styled_df)
-
-
+st.subheader("📋 All Applications")
+st.dataframe(filtered_df)
 
 # 🔽 Paste filter block here
 try:
