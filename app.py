@@ -88,7 +88,7 @@ if search_query:
 
 sort_order = st.selectbox("Sort applications by:", ["Newest first", "Oldest first"])
 
-if not filtered_df.empty:
+if not filtered_df == df[df['Status'] == selected_status]:
     filtered_df['Application Date'] = pd.to_datetime(filtered_df['Application Date'], errors='coerce')
 
     if sort_order == "Newest first":
