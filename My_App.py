@@ -51,19 +51,18 @@ with st.form(key='application_form'):
 
 # --- Filters ---
 st.subheader("📋 All Applications")
-
-if not df.empty:
-    statuses = df['Status'].unique().tolist()
-    selected_status = st.multiselect("Filter by Status", options=statuses, default=statuses)
-
+if not df.empty and pd.notnull(df['Application Date'].min()):
     min_date = df['Application Date'].min().date()
     max_date = df['Application Date'].max().date()
     date_range = st.date_input("Filter by Date Range", value=(min_date, max_date))
-
+    
     filtered_df = df[
         (df['Status'].isin(selected_status)) &
         (df['Application Date'].between(pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1])))
     ]
+else:
+    st.warning("⚠️ No valid application dates available for filtering.")
+    filtered_df = df.copy()
 
     # Search
     search_query = st.text_input("🔍 Search company name")
@@ -110,7 +109,4 @@ if not df.empty:
     fig, ax = plt.subplots()
     ax.pie(status_counts['Count'], labels=status_counts['Status'], autopct='%1.1f%%', startangle=90)
     ax.axis('equal')
-    st.pyplot(fig)
-
-else:
-    st.warning("⚠️ No application data available yet.")
+    st.pyplot(fig) 
