@@ -89,15 +89,15 @@ if search_query:
 
 sort_order = st.selectbox("Sort applications by:", ["Newest first", "Oldest first"])
 
-# Apply filtering based on selected status
+
 filtered_df = df[df['Status'] == selected_status]
 
-# Check if filtered_df has any data
+
 if not filtered_df.empty:
-    # Convert Application Date to datetime
+
     filtered_df['Application Date'] = pd.to_datetime(filtered_df['Application Date'], errors='coerce')
 
-    # Sort by date
+
     if sort_order == "Newest first":
         filtered_df = filtered_df.sort_values(by="Application Date", ascending=False)
     else:
