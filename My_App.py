@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-import os 
-
+import os  
 st.set_page_config(page_title="Career Tracker", layout="wide")
 st.header("📝 Add New Application")
 
