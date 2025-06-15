@@ -58,8 +58,7 @@ with st.form(key='application_form'):
         df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
         # Save the updated DataFrame back to CSV
         df.to_csv(df_path, index=False)
-        st.success("✅ Application added successfully!")
-        # Rerun the app to clear the form and update filters/display
+        st.success("✅ Application added successfully!") 
         st.rerun() # --- CHANGED from st.experimental_rerun() to st.rerun() ---
 
 # ------------------- FILTERS ----------------------
