@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-import os  
+import os 
+
 st.set_page_config(page_title="Career Tracker", layout="wide")
 st.header("📝 Add New Application")
 
@@ -59,7 +60,7 @@ with st.form(key='application_form'):
         df.to_csv(df_path, index=False)
         st.success("✅ Application added successfully!")
         # Rerun the app to clear the form and update filters/display
-        st.experimental_rerun()
+        st.rerun() # --- CHANGED from st.experimental_rerun() to st.rerun() ---
 
 # ------------------- FILTERS ----------------------
 # Check if df is not empty AND 'Application Date' column exists AND it contains at least one non-NaT value
