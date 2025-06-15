@@ -30,15 +30,15 @@ with st.form(key='application_form'):
     col1, col2 = st.columns(2)
 
     with col1:
-        job_title = st.text_input("Job Title", help="e.g., Software Engineer")
-        company = st.text_input("Company", help="e.g., Google")
+        job_title = st.text_input("Job Title", help="e.g., Data Analyst")
+        company = st.text_input("Company", help="e.g., Urban-luxe")
         application_date = st.date_input("Application Date", help="Select the date you applied.")
 
     with col2:
         status = st.selectbox("Application Status", ["Applied", "Interview", "Offer", "Rejected", "No Response"],
                               help="Current status of your application.")
         job_link = st.text_input("Job Link (optional)", help="Direct link to the job posting.")
-        location = st.text_input("Location (City, Country)", help="e.g., New York, USA")
+        location = st.text_input("Location (City, Country)", help="e.g., South Africa, Soweto")
 
     notes = st.text_area("Additional Notes", help="Any specific details, contacts, or follow-ups.")
     submitted = st.form_submit_button("➕ Add Application")
