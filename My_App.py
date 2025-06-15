@@ -3,11 +3,7 @@ import pandas as pd
 import os
 
 st.set_page_config(page_title="Career Tracker", layout="wide")
-st.header("📝 Add New Application")
-
-# Ensure data folder exists
-#if not os.path.exists("data"):
-#    os.makedirs("data")
+st.header("📝 Add New Application") 
 
 df_path = "data/applications.csv"
 
