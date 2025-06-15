@@ -49,20 +49,26 @@ with st.form(key='application_form'):
         df.to_csv(df_path, index=False)
         st.success("✅ Application added successfully!")
 
-# --- Filters ---
-st.subheader("📋 All Applications")
-if not df.empty and pd.notnull(df['Application Date'].min()):
-    min_date = df['Application Date'].min().date()
-    max_date = df['Application Date'].max().date()
-    date_range = st.date_input("Filter by Date Range", value=(min_date, max_date))
-    
-    filtered_df = df[
-        (df['Status'].isin(selected_status)) &
-        (df['Application Date'].between(pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1])))
-    ]
+if not df.empty:
+    # Convert to datetime safely
+    df['Application Date'] = pd.to_datetime(df['Application Date'], errors='coerce')
+
+    # Check if any valid dates exist
+    if df['Application Date'].notna().any():
+        min_date = df['Application Date'].min().date()
+        max_date = df['Application Date'].max().date()
+        date_range = st.date_input("Filter by Date Range", value=(min_date, max_date))
+
+        filtered_df = df[
+            (df['Status'].isin(selected_status)) &
+            (df['Application Date'].between(pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1])))
+        ]
+    else:
+        st.warning("⚠️ No valid dates to filter. Please check your data.")
+        filtered_df = df.copy()
 else:
-    st.warning("⚠️ No valid application dates available for filtering.")
-    filtered_df = df.copy()
+    st.warning("⚠️ No application data available.")
+    filtered_df = df.copy() 
 
     # Search
     search_query = st.text_input("🔍 Search company name")
