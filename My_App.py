@@ -112,3 +112,14 @@ if not filtered_df.empty and 'Application Date' in filtered_df.columns:
     ).size()
     time_series.index = time_series.index.astype(str)
     st.line_chart(time_series) 
+if not filtered_df.empty:
+    st.subheader("🧁 Status Distribution (Pie Chart)")
+    status_counts = filtered_df['Status'].value_counts().reset_index()
+    status_counts.columns = ['Status', 'Count']
+
+    fig, ax = plt.subplots()
+    ax.pie(status_counts['Count'], labels=status_counts['Status'], autopct='%1.1f%%', startangle=90)
+    ax.axis('equal')
+    st.pyplot(fig)
+else:
+    st.info("No data available to display pie chart.")
